@@ -15,10 +15,10 @@
 <!--导航栏-->
 <ul class="layui-nav">
   <li class="layui-nav-item">
-    <a href="">控制台<span class="layui-badge">9</span></a>
+    <a href="/xadmin/" target="_blank">控制台<span class="layui-badge">9</span></a>
   </li>
   <li class="layui-nav-item">
-    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+    <a href="/msg/" target="_blank">留言<span class="layui-badge-dot"></span></a>
   </li>
   <li class="layui-nav-item">
     <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
@@ -60,6 +60,11 @@
             //,skin: 'row' //行边框风格
             //,even: true //开启隔行背景
             //,size: 'lg' //小尺寸的表格
+            ,limits:[30,50,100,200]
+            ,limit:20
+            ,  text: {
+                none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
+             }
         });
     });
     //导航栏二级菜单
