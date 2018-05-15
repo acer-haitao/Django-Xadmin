@@ -23,9 +23,9 @@ from job import views as job_views
 
 
 urlpatterns = [
-    #url(r'^admin/', admin.site.urls),
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^msg/$', msg_views.msg, name='msg'),
     url(r'^dbtojson/$', job_views.dbtojson, name='dbtojson'),
+    url(r'^search/$',job_views.search,name='search'),
     url(r'^$', job_views.index, name='index'),
 ]

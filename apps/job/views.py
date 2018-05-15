@@ -23,5 +23,11 @@ def dbtojson(request):
 
 
 def index(request):
-
     return render(request,'jobtable.html')
+
+def search(request):
+    if request.method == 'POST':
+        search_data = request.POST.get('input')
+        select_data = request.POST.get('select')
+        print(search_data,select_data)
+        return render(request,'message.html')

@@ -7,28 +7,53 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="{% static '/css/layui.css' %}"  media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-
-<!--导航栏-->
-<ul class="layui-nav">
-  <li class="layui-nav-item">
-    <a href="/xadmin/" target="_blank">控制台<span class="layui-badge">9</span></a>
-  </li>
-  <li class="layui-nav-item">
-    <a href="/msg/" target="_blank">留言<span class="layui-badge-dot"></span></a>
-  </li>
-  <li class="layui-nav-item">
-    <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
-    <dl class="layui-nav-child">
-      <dd><a href="javascript:;">修改信息</a></dd>
-      <dd><a href="javascript:;">安全管理</a></dd>
-      <dd><a href="javascript:;">退了</a></dd>
-    </dl>
-  </li>
-</ul>
+<div class="layui-row">
+    <!--导航栏-->
+    <ul class="layui-nav">
+        <li class="layui-nav-item">
+            <a href="/xadmin/" target="_blank">控制台<span class="layui-badge">9</span></a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="/msg/" target="_blank">留言<span class="layui-badge-dot"></span></a>
+        </li>
+        <li class="layui-nav-item">
+            <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">我</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">修改信息</a></dd>
+                <dd><a href="javascript:;">安全管理</a></dd>
+                <dd><a href="javascript:;">退了</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <div class="layui-form component  layui-fluid">
+        <form action="/search/" method="POST">
+            {% csrf_token %}
+            <div class="layui-row">
+                <div class="layui-input-inline layui-col-sm3 ">
+                    <select name="select">
+                        <option value="">请选择省</option>
+                        <option value="浙江" selected="">浙江省</option>
+                        <option value="你的工号">江西省</option>
+                        <option value="你最喜欢的老师">福建省</option>
+                    </select>
+                </div>
+                <div class="layui-input-inline layui-col-sm3">
+                    <input lay-verify="title" autocomplete="off" placeholder="请输入标题" name="input" class="layui-input" type="text">
+                </div>
+                <div class="layui-input-inline layui-col-sm3">
+                    <button class="layui-btn layui-btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <!--表格展示-->
 <table class="layui-hide" id="test"></table>
 
@@ -64,7 +89,7 @@
             ,limit:20
             ,  text: {
                 none: '暂无相关数据' //默认：无数据。注：该属性为 layui 2.2.5 开始新增
-             }
+            }
         });
     });
     //导航栏二级菜单
