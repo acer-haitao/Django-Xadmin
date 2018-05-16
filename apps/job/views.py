@@ -8,7 +8,7 @@ def dbtojson(request):
     page = int(request.GET.get('page'))
     limit = int(request.GET.get('limit'))
 
-    getdata = models.job51.objects.values('id','job','jobaddress','date','wages','jobname','joburl','jobtxt')
+    getdata = models.job51.objects.values('id','job','jobaddress','date','wages','jobname','joburl','jobtxt').order_by('-date')
     all_page =int(getdata.count())/limit
     remain_page = int(getdata.count())%limit
     if remain_page > 0:
@@ -39,6 +39,9 @@ def search(request):
                 return render(request, 'search.html', {'getdata': getdata})
             elif select_data == "address":
                 getdata = models.job51.objects.filter(Q(address__startswith=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "jobaddress":
+                getdata = models.job51.objects.filter(Q(jobaddress__contains=search_data)).values().order_by('-date')
                 return render(request, 'search.html', {'getdata': getdata})
             elif select_data == "job":
                 getdata = models.job51.objects.filter(Q(job__contains=search_data)).values().order_by('-date')
