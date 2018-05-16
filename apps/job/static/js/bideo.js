@@ -113,8 +113,8 @@
         }
       }
 
-      return;
-    }
+
+    };
 
     // Called once video metadata is available
     //

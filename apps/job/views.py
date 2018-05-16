@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from django.db.models import Q
 from job import models
 # Create your views here.
 
@@ -27,7 +27,33 @@ def index(request):
 
 def search(request):
     if request.method == 'POST':
+        #文本输入信息
         search_data = request.POST.get('input')
+        #select自动选择信息
         select_data = request.POST.get('select')
-        print(search_data,select_data)
-        return render(request,'message.html')
+
+        #address, company, date, id, job, jobaddress, jobname, jobtxt, joburl, wages
+        if search_data:
+            if select_data == "date":
+                getdata = models.job51.objects.filter(Q(date__startswith=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "address":
+                getdata = models.job51.objects.filter(Q(address__startswith=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "job":
+                getdata = models.job51.objects.filter(Q(job__contains=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "wages":
+                getdata = models.job51.objects.filter(Q(wages__contains=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "jobname":
+                getdata = models.job51.objects.filter(Q(jobname__contains=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+            elif select_data == "company":
+                getdata = models.job51.objects.filter(Q(company__contains=search_data)).values().order_by('-date')
+                return render(request, 'search.html', {'getdata': getdata})
+        else:
+            err_msg = "查找失败,请检查输入是否正确！"
+            return render(request,'search.html',{"err_msg":err_msg})
+    err_msg = "查找失败,请检查输入是否正确！"
+    return render(request,'search.html',{"err_msg":err_msg})

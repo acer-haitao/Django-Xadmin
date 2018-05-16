@@ -18,6 +18,9 @@
     <!--导航栏-->
     <ul class="layui-nav">
         <li class="layui-nav-item">
+            <a href="/" target="_blank">首页</a>
+        </li>
+        <li class="layui-nav-item">
             <a href="/xadmin/" target="_blank">控制台<span class="layui-badge">9</span></a>
         </li>
         <li class="layui-nav-item">
@@ -38,10 +41,13 @@
             <div class="layui-row">
                 <div class="layui-input-inline layui-col-sm3 ">
                     <select name="select">
-                        <option value="">请选择省</option>
-                        <option value="浙江" selected="">浙江省</option>
-                        <option value="你的工号">江西省</option>
-                        <option value="你最喜欢的老师">福建省</option>
+                        <option value="">请选择相应的字段</option>
+                        <option value="date" selected="">日期</option>
+                        <option value="jobname">职位分类</option>
+                        <option value="address">地点区域</option>
+                        <option value="job">岗位</option>
+                        <option value="company">公司名称</option>
+                        <option value="wages">薪资</option>
                     </select>
                 </div>
                 <div class="layui-input-inline layui-col-sm3">
@@ -101,6 +107,10 @@
             //console.log(elem)
             layer.msg(elem.text());
         });
+    });
+    layui.use('form', function(){
+        var form = layui.form;
+        //各种基于事件的操作，下面会有进一步介绍
     });
 </script>
 
